@@ -1,0 +1,48 @@
+/* vymaze nepotrebne image sizes */
+
+function remove_extra_image_sizes() {
+    foreach ( get_intermediate_image_sizes() as $size ) {
+    
+      if ( !in_array( $size, array( 'thumbnail', 'medium',  'article-loop', 'large' ) ) ) {
+          remove_image_size( $size );
+      }
+    }
+}
+ 
+add_action('init', 'remove_extra_image_sizes');   
+
+
+
+add_filter( 'intermediate_image_sizes', function( $sizes )
+{
+    return array_filter( $sizes, function( $val )
+    {
+        return 'medium_large' !== $val; // Filter out 'medium_large'
+    } );
+} );
+
+
+
+<script type="text/javascript">
+  (function($){
+      $( document ).on( 'change', 'input[name^="payment_method"]', function() {
+        $('body').trigger('update_checkout');
+      });
+  })(jQuery);
+</script>
+
+
+https://support.advancedcustomfields.com/forums/topic/how-to-move-fields-to-another-post/
+
+
+/* pridá nad thumbnail text */
+
+function custom_admin_post_thumbnail_html( $content ) {
+    if($GLOBALS['post_type'] == 'novinky_na_veltrhu'){
+      echo 'Velkost obrázku: 100x100 px';
+    } else if($GLOBALS['post_type'] == 'post'){
+      echo 'Velkost obrázku: 308x192 px';
+    };
+    return $content;
+}
+add_filter( 'admin_post_thumbnail_html', 'custom_admin_post_thumbnail_html' );

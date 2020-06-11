@@ -1,0 +1,28 @@
+<?php
+/**
+ * Show messages
+ *
+ * This template can be overridden by copying it to yourtheme/woocommerce/notices/notice.php.
+ *
+ * @see         https://docs.woocommerce.com/document/template-structure/
+ * @package     WooCommerce/Templates
+ * @version     3.5.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/* only checkout */
+global $post;
+
+if ( ! $messages or $post->ID != 8 ) {
+	return;
+}
+
+
+foreach ( $messages as $message ) : ?>
+    <div class="notif danger woocommerce-message" role="alert">
+	   <?= wc_kses_notice( $message ); ?>
+	</div>
+<?php endforeach; 

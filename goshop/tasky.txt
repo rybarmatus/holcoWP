@@ -1,0 +1,59 @@
+<script>
+gtag('event', 'purchase', {
+  "transaction_id": "<?php echo $shop_order_data['id_order']; ?>",
+  "affiliation": "Kamagra4europe.net",
+  "value": <?= number_format(round($shop_order_data['total'], 2), 2, '.', ''); ?>,
+  "currency": "EUR",
+  "tax": <?= $shop_order_data['vat']; ?>,
+  "shipping": 0,
+  "items": [
+    <?php foreach ($shop_order_item_data as $key => $val)			{
+			$item = $shop_order_item_data[$key];
+			if($item["type"] != "delivery"){ ?>
+   
+   {
+       'name': <?= "'".hsc($item['item_name'])."'"; ?>,
+       'price': <?= number_format(round(($item['total_price']/$item['quantity']), 2), 2, '.', ''); ?>,
+       'quantity': <?= $item['quantity']; ?>
+       
+   }
+   
+     
+   <?php if(isset($shop_order_item_data[$key+1])){ 
+          echo ',';
+         }
+      }  
+		}  ?>
+  ]
+});
+ /* 
+window.dataLayer = window.dataLayer || []
+dataLayer.push({
+   'transactionId': <?php echo "'".$shop_order_data['id_order']."'"; ?>,
+   'transactionAffiliation': 'Kamagra4europe.net',
+   'transactionTotal': <?= "'".number_format(round($shop_order_data['total'], 2), 2, '.', '')."'"; ?>,
+   'transactionTax': <?= "'".$shop_order_data['vat']."'"; ?>,
+   'transactionShipping': 0,
+   'transactionProducts': [
+<?php foreach ($shop_order_item_data as $key => $val)			{
+			$item = $shop_order_item_data[$key];
+			if($item["type"] != "delivery"){ ?>
+   
+   {
+       'name': <?= "'".hsc($item['item_name'])."'"; ?>,
+       'price': <?= "'".number_format(round(($item['total_price']/$item['quantity']), 2), 2, '.', '')."'"; ?>,
+       'quantity': <?= "'".$item['quantity']."'"; ?>
+       
+   }
+   
+     
+   <?php if(isset($shop_order_item_data[$key+1])){ 
+          echo ',';
+         }
+      }  
+		}  ?>
+   
+   ]
+});
+          */
+</script>

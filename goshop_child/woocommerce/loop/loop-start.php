@@ -1,0 +1,1 @@
+<div class="row product-list <?php if( isset($_COOKIE['product-list-row']) and $_COOKIE['product-list-row'] == 1 and (defined('PRODUCT_CATEGORY') and PRODUCT_CATEGORY)){ echo 'full-row'; } ?>">
